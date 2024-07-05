@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_curd/util/todo_title.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +9,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List toDolist = [
+    ['Wake up', false],
+    ['do exercise', false],
+  ];
+
+  void checkBoxChange(bool? value, int index) {
+    setState(() {
+      toDolist[index][1] = !toDolist[index][1];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +34,17 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          Container(
-            height: 60,
-            width: 250,
-            decoration: BoxDecoration(
-              // color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 2),
-            ),
-          ),
-        ],
+      body: ListView.builder(
+        itemCount: toDolist.length,
+        itemBuilder: (context, index) {
+          return ToDoTitle(
+            name: toDolist[index][0],
+            taskCom: toDolist[index][1],
+            onChanged: (value) {
+              checkBoxChange(value, index);
+            },
+          );
+        },
       ),
     );
   }
