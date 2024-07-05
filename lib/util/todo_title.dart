@@ -14,7 +14,7 @@ class ToDoTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
       child: Container(
         height: 60,
         width: 250,
@@ -29,9 +29,11 @@ class ToDoTitle extends StatelessWidget {
             Text(
               name,
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400),
+                decoration:
+                    taskCom ? TextDecoration.lineThrough : TextDecoration.none,
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
           ],
         ),
